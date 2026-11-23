@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Nova AI</string>
+    <string name="tagline">AI Chat &amp; APK Coding Studio</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="sign_out">Sign out</string>
+    <string name="new_chat">New chat</string>
+    <string name="tab_chat">AI Chat</string>
+    <string name="tab_vault">Code Vault</string>
+    <string name="ask_anything_hint">Ask Nova AI or paste Kotlin/Gradle code…</string>
+    <string name="attach_image">Attach image</string>
+    <string name="send_message">Send message</string>
+    <string name="stop_generation">Stop generating</string>
+    <string name="copy_code">Copy</string>
+    <string name="copied_feedback">Copied to clipboard</string>
+    <string name="save_snippet">Save</string>
+    <string name="saved_feedback">Saved to Code Vault</string>
+    <string name="add_snippet">New Snippet</string>
+    <string name="delete_label">Delete</string>
+    <string name="history_drawer_title">Conversations</string>
+    <string name="no_chats_yet">No saved conversations yet</string>
+    <string name="no_snippets_yet">Your APK Code Vault is empty</string>
+    <string name="search_snippets_hint">Search snippets or language…</string>
+    <string name="model_settings_title">AI Brain &amp; Mode</string>
+</resources>

@@ -1,0 +1,162 @@
+{
+  "entities": {
+    "ChatSession": {
+      "title": "ChatSession",
+      "description": "A persistent AI conversation session belonging to a user.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID."
+        },
+        "title": {
+          "type": "string",
+          "description": "Short display title of the conversation (1..120 chars)."
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["CHAT", "APK_CODER", "DEBUGGER", "SUMMARIZER"],
+          "description": "Specialized AI persona mode."
+        },
+        "modelId": {
+          "type": "string",
+          "enum": ["gemini-3.8-flash", "gemini-3.5-flash-lite", "gemini-4-argon"],
+          "description": "Selected Gemini model identifier."
+        },
+        "lastMessagePreview": {
+          "type": "string",
+          "description": "Preview of the latest message (0..300 chars)."
+        },
+        "messageCount": {
+          "type": "integer",
+          "description": "Total number of messages in this chat."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp written with FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp written with FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "mode",
+        "modelId",
+        "lastMessagePreview",
+        "messageCount",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "A single message turn within a ChatSession.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Denormalized owner Firebase Auth UID."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["USER", "MODEL"],
+          "description": "Speaker role."
+        },
+        "text": {
+          "type": "string",
+          "description": "Message markdown/code content (1..50000 chars)."
+        },
+        "hasImage": {
+          "type": "boolean",
+          "description": "Whether the user turn included an attached image."
+        },
+        "modelUsed": {
+          "type": "string",
+          "description": "Optional Gemini model identifier used for MODEL responses."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp written with FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "role",
+        "text",
+        "hasImage",
+        "createdAt"
+      ]
+    },
+    "CodeSnippet": {
+      "title": "CodeSnippet",
+      "description": "A saved APK/Android or general code snippet stored in the user's vault.",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "Owner Firebase Auth UID."
+        },
+        "title": {
+          "type": "string",
+          "description": "Snippet title (1..120 chars)."
+        },
+        "language": {
+          "type": "string",
+          "description": "Programming language or config format (e.g. kotlin, xml, gradle)."
+        },
+        "code": {
+          "type": "string",
+          "description": "Source code body (1..50000 chars)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional user notes (0..1000 chars)."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp written with FieldValue.serverTimestamp()."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last update timestamp written with FieldValue.serverTimestamp()."
+        }
+      },
+      "required": [
+        "userId",
+        "title",
+        "language",
+        "code",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}/chats/{chatId}": {
+      "schema": {
+        "$ref": "#/entities/ChatSession"
+      },
+      "description": "User-owned AI conversation sessions."
+    },
+    "/users/{userId}/chats/{chatId}/messages/{messageId}": {
+      "schema": {
+        "$ref": "#/entities/ChatMessage"
+      },
+      "description": "Messages within a user's AI conversation session."
+    },
+    "/users/{userId}/snippets/{snippetId}": {
+      "schema": {
+        "$ref": "#/entities/CodeSnippet"
+      },
+      "description": "User-owned saved APK and coding snippets."
+    }
+  }
+}

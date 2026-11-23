@@ -1,0 +1,6 @@
+{
+  "name": "Nova AI",
+  "description": "AI chat assistant and coding studio with multi-turn conversations, code generation, and cloud sync.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
